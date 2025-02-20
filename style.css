@@ -1,39 +1,89 @@
+@font-face {
+  font-display: swap;
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url(./fonts/JetBrainsMono-Regular.woff2) format('woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Doto';
+  font-style: normal;
+  font-weight: 700;
+  src: url('./fonts/doto-v1-latin-700.woff2') format('woff2');
+}
+
+
 * {
-  font-family: "JetBrainsMono NF";
+  font-family: "JetBrains Mono", 'Courier New', Courier, monospace;
   font-size: 1.5rem;
   box-sizing: border-box;
 }
 
 body {
+  background-color: #47425d;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+}
+
+button {
+  min-height: 2em;
+  background-color: #605454;
+  color: #fff9dd;
+  border: 0;
+  box-shadow: #493e3e 0 6px;
+  transition: all 50ms ease;
+}
+button:active {
+  filter: brightness(85%);
+  transform: translateY(6px);
+  box-shadow: none !important;
 }
 
 #calculator {
-  background-color: #aedcff;
-  width: 560px;
-  padding: 1rem;
+  background-color: #d5d6b9;
+  box-shadow: #a49b7e 0 0.75em;
+  width: 12em;
+  padding: 1em;
 }
 
 .display {
-  border: #777 solid 2px;
-  height: 4em;
+  background-color: #81736b;
+  border: none;
+  box-shadow:
+    inset #b2ac8d 0 4px 0 3px,
+    inset #71615a 0 -4px 16px 8px;
   width: 100%;
+  font-family: "Doto", 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 1.5em;
+  color: #fff9dd;
   text-align: end;
-  padding: 4px 12px;
+  margin-bottom: 0.75em;
+  padding: 0.5em 0.35em;
 }
 
 .btnSection {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 }
 
-.btnSection button {
-  min-height: 2em;
+.numBtn {
+  background-color: #a69a84;
+  box-shadow: #6f625a 0 6px;
+  color: #493e3e;
 }
 
 #addBtn {
   grid-row: span 2;
+}
+
+#clear {
+  grid-column: span 2;
+}
+
+#clear {
+  background-color: #ff8446;
+  box-shadow: #af422e 0 6px;
 }

@@ -12,7 +12,9 @@ const multiply = (multiplicand, multiplier) =>
   multiplicand * multiplier;
 
 const divide = (dividend, divisor) =>
-  dividend / divisor;
+  divisor === 0
+? "Uh oh!"
+: dividend / divisor;
 
 const operate = (num1, num2, operator) => {
   switch (operator) {
@@ -40,34 +42,38 @@ const btnSection = document.querySelector(".btnSection")
 
 btnSection.addEventListener("click", btn => {
   btn = btn.target;
+  
   if (btn.id === "clear") {
     display.value = '';
-  } else if (btn.id === "evaluate") {
+  } else if (btn.id === "return") {
+    display.value = display.value.slice(0, -1)
+  }
+  else if (btn.id === "evaluate") {
     const output = evaluate(display.value);
     display.value = output;
-  };
-
-  const btnType = btn.className;
-  const btnValue = btn.textContent;
-
-  if (btnType.includes("numBtn") || btnType.includes("operatorBtn")) {
+  } else {
+    const btnValue = btn.textContent;
     display.value += btnValue;
-  };
+  }
+
 });
 
+// This might be the most beautiful piece of
+// art I've ever made.
 function evaluate(expression) {
-  let output
+  let output;
   const operands = expression
-    .split(/[+\-/*]/)
-    .map(operand => +operand);
-  const operators = expression
+    .split(/[+\-/*]/)           // take out the math symbols
+    .map(operand => +operand);  // turn the operands into integers
+
+  const operators = expression  // only take in the math symbols
     .split("")
     .filter(char => char.match(/[+\-/*]/));
   
   while (operators.length > 0) {
-    let operator = operators.shift()
+    let operator = operators.shift();
     output = operate(...operands.splice(0,2), operator);
     operands.unshift(output);
-  }
-  return output;
+  };
+  return output ? output.toFixed(6) : operands[0];
 };
