@@ -32,7 +32,7 @@ body {
 }
 
 button {
-  min-height: 1.6em;
+  min-height: 1.75em;
   background-color: #605454;
   color: #fff9dd;
   border: 0;
@@ -96,7 +96,7 @@ footer * {
   color: #fff9dd;
   text-align: end;
   margin-bottom: 0.75em;
-  padding: 0.5em 0.35em;
+  padding: 0.35em;
 }
 
 .btnSection {
