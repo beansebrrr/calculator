@@ -1,32 +1,39 @@
-body * {
+* {
   font-family: "JetBrainsMono NF";
+  font-size: 1.5rem;
+  box-sizing: border-box;
 }
 
-.calculator {
-  width: fit-content;
+body {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#calculator {
+  background-color: #aedcff;
+  width: 560px;
+  padding: 1rem;
 }
 
 .display {
-  height: 3rem;
   border: #777 solid 2px;
+  height: 4em;
+  width: 100%;
   text-align: end;
   padding: 4px 12px;
 }
 
 .btnSection {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 4px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
-.btnRow {
-  height: fit-content;
+.btnSection button {
+  min-height: 2em;
 }
 
-.btnRow button {
-  width: 3rem;
-  height: 2rem;
+#addBtn {
+  grid-row: span 2;
 }
