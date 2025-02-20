@@ -1,0 +1,27 @@
+body * {
+  font-family: "JetBrainsMono NF";
+}
+
+.calculator {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.display {
+  height: 3rem;
+  border: #777 solid 2px;
+  text-align: end;
+}
+
+.btnSection {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+}
+
+.btnRow button {
+  width: 2rem;
+  height: 1.5rem;
+}
