@@ -13,6 +13,7 @@ body * {
   height: 3rem;
   border: #777 solid 2px;
   text-align: end;
+  padding: 4px 12px;
 }
 
 .btnSection {
@@ -21,7 +22,11 @@ body * {
   gap: 4px;
 }
 
+.btnRow {
+  height: fit-content;
+}
+
 .btnRow button {
-  width: 2rem;
-  height: 1.5rem;
+  width: 3rem;
+  height: 2rem;
 }
