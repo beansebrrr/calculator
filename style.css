@@ -116,10 +116,6 @@ footer * {
 }
 
 #clear {
-  grid-column: span 2;
-}
-
-#clear {
   background-color: #ff8446;
   box-shadow: #af422e 0 6px;
 }

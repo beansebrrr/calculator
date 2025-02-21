@@ -74,7 +74,11 @@ function evaluate(expression) {
     .split(regex)
     // Since the expression started off as a string, I do
     // have to convert it to numbers.
-    .map(operand => +operand);
+    .map(operand =>
+      operand.slice(-1) == "%"
+      ? operand = (+operand.slice(0, -1)) / 100
+      : +operand
+  );
 
   const operators = expression
     .split("")
@@ -102,7 +106,7 @@ function roundOff(num) {
 
 document.addEventListener("keydown", e => {
   const key = e.key;
-  const regex = /^[+\-/*\u2212\u002B\u00F7\u00D70-9\.]{1}$/
+  const regex = /^[+\-/*\u2212\u002B\u00F7\u00D70-9\.%]{1}$/
   if (key.match(regex) && display.value.length < 9) { 
     appendToDisplay(key);
   } else if (key === 'Backspace') {
