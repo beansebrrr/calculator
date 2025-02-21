@@ -56,7 +56,7 @@ btnSection.addEventListener("click", btn => {
     appendToDisplay(out);
   } else if (
     (btn.classList.contains("numBtn") || btn.classList.contains("operatorBtn"))
-    && display.value.length < 9) {
+    && display.value.length < 10) {
     appendToDisplay(btn.textContent);
   };
 
@@ -68,31 +68,35 @@ btnSection.addEventListener("click", btn => {
 // art I've ever made.
 function evaluate(expression) {
   let output;
-  const regex = /[+\-*/\u2122\u002B\u00F7\u00D7]/
+
+  // regex of mathematical operators
+  const acceptedOperators = /[+\-*/\u2122\u002B\u00F7\u00D7]/
 
   const operands = expression
-    .split(regex)
-    // Since the expression started off as a string, I do
-    // have to convert it to numbers.
-    .map(operand =>
+    .split(acceptedOperators)
+    .map(operand =>                   
       operand.slice(-1) == "%"
-      ? operand = (+operand.slice(0, -1)) / 100
-      : +operand
-  );
+      ? operand = (+operand.slice(0, -1)) / 100   // This part converts percentages into decimal formats.
+      : +operand  // Since the expression started off as a string, I do
+  );              // have to set its data type to Number.
 
   const operators = expression
     .split("")
-    .filter(char => char.match(regex));
+    .filter(char => char.match(acceptedOperators));
   
+  // Operates on the math expression left-to-right
   while (operators.length > 0) {
     let operator = operators.shift();
     output = operate(...operands.splice(0,2), operator);
     operands.unshift(output);
   };
+
   return output ? roundOff(output) : operands[0];
 };
 
 function roundOff(num) {
+  // There's a special case where the calculator purposefully outputs a string, and
+  // if that's the case, I made sure this will just return the string as is.
   if (typeof(num) == "number") {
     return Math.round(num * Math.pow(10, 6)) / Math.pow(10, 6);
   };
@@ -106,8 +110,11 @@ function roundOff(num) {
 
 document.addEventListener("keydown", e => {
   const key = e.key;
-  const regex = /^[+\-/*\u2212\u002B\u00F7\u00D70-9\.%]{1}$/
-  if (key.match(regex) && display.value.length < 9) { 
+
+  // regex for numbers, math operators, ".", and "%".
+  const acceptedChars = /^[+\-/*\u2212\u002B\u00F7\u00D70-9\.%]{1}$/ 
+  
+  if (key.match(acceptedChars) && display.value.length < 10) { 
     appendToDisplay(key);
   } else if (key === 'Backspace') {
     clearDisplay(false);
