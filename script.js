@@ -1,4 +1,13 @@
 /**
+ * SOME IMPORTANT CONSTANTS
+ */
+
+const display = document.querySelector(".display")
+const btnSection = document.querySelector(".btnSection")
+const errorMessage = "Uh oh!"
+
+
+/**
  * MATH OPERATIONS
  */
 
@@ -13,9 +22,8 @@ const multiply = (multiplicand, multiplier) =>
 
 const divide = (dividend, divisor) =>
   divisor == 0
-  ? "Uh oh!"  // You can't divide by 0.
+  ? errorMessage  // You can't divide by 0.
   : dividend / divisor;
-
 
 // Operates on the numbers based on the given
 // operator (duh).
@@ -38,34 +46,11 @@ const operate = (num1, num2, operator) => {
       break;
   };
 };
-
+  
 
 /**
- * UI Interactivity
+ * EVALUATION
  */
-
-const display = document.querySelector(".display")
-const btnSection = document.querySelector(".btnSection")
-
-btnSection.addEventListener("click", btn => {
-  btn = btn.target;
-  
-  if (btn.id === "clearBtn") {
-    clearDisplay(true);
-  } else if (btn.id === "returnBtn") {
-    clearDisplay(false);
-  } else if (btn.id === "evaluateBtn") {
-    showResult();
-  } else if (
-    (btn.classList.contains("numBtn")
-    || btn.classList.contains("operatorBtn"))
-    && display.value.length < 10) {
-    appendToDisplay(btn.textContent);
-  };
-
-  // remove focus from the buttons
-  btn.blur();
-});
 
 // This might be the most beautiful piece of
 // art I've ever made.
@@ -108,6 +93,31 @@ function roundOff(num) {
 
 
 /**
+ * UI Interactivity
+ */
+
+btnSection.addEventListener("click", btn => {
+  btn = btn.target;
+  
+  if (btn.id === "clearBtn") {
+    clearDisplay(true);
+  } else if (btn.id === "returnBtn") {
+    clearDisplay(false);
+  } else if (btn.id === "evaluateBtn") {
+    showResult();
+  } else if (
+    (btn.classList.contains("numBtn")
+    || btn.classList.contains("operatorBtn"))
+    && display.value.length < 10) {
+    appendToDisplay(btn.textContent);
+  };
+
+  // remove focus from the buttons
+  btn.blur();
+});
+
+
+/**
  * KEYBOARD INPUT
  */
 
@@ -141,7 +151,7 @@ function clearDisplay(all=false) {all
 };
 
 function showResult() {
-  const out = evaluate(display.value);
+  const out = evaluate(display.value) || errorMessage;
   clearDisplay(true);
   appendToDisplay(out);
 };
