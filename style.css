@@ -5,6 +5,7 @@
   font-weight: 400;
   src: url(./fonts/JetBrainsMono-Regular.woff2) format('woff2');
 }
+
 @font-face {
   font-display: swap;
   font-family: 'Doto';
@@ -12,7 +13,6 @@
   font-weight: 700;
   src: url('./fonts/doto-v1-latin-700.woff2') format('woff2');
 }
-
 
 * {
   font-family: "JetBrains Mono", 'Courier New', Courier, monospace;
@@ -41,10 +41,21 @@ button {
   transition: all 50ms ease;
   user-select: none;
 }
+
 button:active {
   filter: brightness(85%);
   transform: translateY(6px);
   box-shadow: none !important;
+}
+
+main {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  width: inherit;
+  height: 100%;
+  margin: 1rem;
+  padding-bottom: 2rem;
 }
 
 footer {
@@ -61,15 +72,6 @@ footer * {
   color: #fff;  
 }
 
-.content {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  width: inherit;
-  height: 100%;
-  margin: 1rem;
-  padding-bottom: 2rem;
-}
 
 #calculator {
   background-color: #d5d6b9;
@@ -96,7 +98,7 @@ footer * {
   color: #fff9dd;
   text-align: end;
   margin-bottom: 0.75em;
-  padding: 0.35em;
+  padding: 0.3em;
 }
 
 .btnSection {
@@ -115,7 +117,7 @@ footer * {
   grid-row: span 2;
 }
 
-#clear {
+#clearBtn {
   background-color: #ff8446;
   box-shadow: #af422e 0 6px;
 }
