@@ -19,12 +19,16 @@ const divide = (dividend, divisor) =>
 const operate = (num1, num2, operator) => {
   switch (operator) {
     case "+":
+    case "\u002B":
       return add(num1, num2);
     case "-":
+    case "\u2212":
       return subtract(num1, num2);
     case "*":
+    case "\u00D7":
       return multiply(num1, num2);
     case "/":
+    case "\u00F7":
       return divide(num1, num2);
     default:
       break;
@@ -64,24 +68,17 @@ btnSection.addEventListener("click", btn => {
 // art I've ever made.
 function evaluate(expression) {
   let output;
-  const regex = /[+\-*/\u00F7\u00D7]/
+  const regex = /[+\-*/\u2122\u002B\u00F7\u00D7]/
 
   const operands = expression
-    .split(regex)           // take out the math symbols
-    .map(operand => +operand);  // turn the operands into integers
+    .split(regex)
+    // Since the expression started off as a string, I do
+    // have to convert it to numbers.
+    .map(operand => +operand);
 
-  const operators = expression  // only take in the math symbols
+  const operators = expression
     .split("")
-    .filter(char => char.match(regex))
-    .map(operator => {
-      if (operator == "\u00F7") {
-        return "/";
-      } else if (operator == "\u00D7") {
-        return "*";
-      } else {
-        return operator;
-      };
-    });
+    .filter(char => char.match(regex));
   
   while (operators.length > 0) {
     let operator = operators.shift();
@@ -105,7 +102,7 @@ function roundOff(num) {
 
 document.addEventListener("keydown", e => {
   const key = e.key;
-  const regex = /^[+\-/*\u00F7\u00D70-9\.]{1}$/
+  const regex = /^[+\-/*\u2212\u002B\u00F7\u00D70-9\.]{1}$/
   if (key.match(regex)) { 
     appendToDisplay(key);
   } else if (key === 'Backspace') {
