@@ -13,9 +13,13 @@ const multiply = (multiplicand, multiplier) =>
 
 const divide = (dividend, divisor) =>
   divisor == 0
-  ? "Uh oh!"
+  ? "Uh oh!"  // You can't divide by 0.
   : dividend / divisor;
 
+
+// Operates on the numbers based on the given
+// operator (duh).
+// (this supports the unicode characters).
 const operate = (num1, num2, operator) => {
   switch (operator) {
     case "+":
@@ -46,16 +50,15 @@ const btnSection = document.querySelector(".btnSection")
 btnSection.addEventListener("click", btn => {
   btn = btn.target;
   
-  if (btn.id === "clear") {
+  if (btn.id === "clearBtn") {
     clearDisplay(true);
-  } else if (btn.id === "return") {
+  } else if (btn.id === "returnBtn") {
     clearDisplay(false);
-  } else if (btn.id === "evaluate") {
-    const out = evaluate(display.value);
-    clearDisplay(true);
-    appendToDisplay(out);
+  } else if (btn.id === "evaluateBtn") {
+    showResult();
   } else if (
-    (btn.classList.contains("numBtn") || btn.classList.contains("operatorBtn"))
+    (btn.classList.contains("numBtn")
+    || btn.classList.contains("operatorBtn"))
     && display.value.length < 10) {
     appendToDisplay(btn.textContent);
   };
@@ -70,7 +73,7 @@ function evaluate(expression) {
   let output;
 
   // regex of mathematical operators
-  const acceptedOperators = /[+\-*/\u2122\u002B\u00F7\u00D7]/
+  const acceptedOperators = /[+\-*/\u2122\u002B\u00F7\u00D7]/;
 
   const operands = expression
     .split(acceptedOperators)
@@ -91,16 +94,16 @@ function evaluate(expression) {
     operands.unshift(output);
   };
 
-  return output ? roundOff(output) : operands[0];
+  output = output || operands[0];
+  return roundOff(output);
 };
 
 function roundOff(num) {
   // There's a special case where the calculator purposefully outputs a string, and
   // if that's the case, I made sure this will just return the string as is.
-  if (typeof(num) == "number") {
-    return Math.round(num * Math.pow(10, 6)) / Math.pow(10, 6);
-  };
-  return num;
+  return typeof(num) == "number"
+  ? Math.round(num * Math.pow(10, 6)) / Math.pow(10, 6) 
+  : num;
 };
 
 
@@ -112,18 +115,16 @@ document.addEventListener("keydown", e => {
   const key = e.key;
 
   // regex for numbers, math operators, ".", and "%".
-  const acceptedChars = /^[+\-/*\u2212\u002B\u00F7\u00D70-9\.%]{1}$/ 
+  const acceptedChars = /^[+\-/*\u2212\u002B\u00F7\u00D70-9\.%]{1}$/;
   
   if (key.match(acceptedChars) && display.value.length < 10) { 
     appendToDisplay(key);
   } else if (key === 'Backspace') {
     clearDisplay(false);
   } else if (key === 'Enter' || key === '=') {
-    const out = evaluate(display.value);
-    clearDisplay(true);
-    appendToDisplay(out);
+    showResult(out)
   };
-})
+});
 
 
 /**
@@ -132,9 +133,15 @@ document.addEventListener("keydown", e => {
 
 function appendToDisplay(char) {
   display.value += char;
-}
+};
 
-function clearDisplay(all=false) {
-  if (all) { display.value = '' }
-  else { display.value = display.value.slice(0, -1) };
-}
+function clearDisplay(all=false) {all
+  ? display.value = ''
+  : display.value = display.value.slice(0, -1);
+};
+
+function showResult() {
+  const out = evaluate(display.value);
+  clearDisplay(true);
+  appendToDisplay(out);
+};
