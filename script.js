@@ -103,7 +103,7 @@ function roundOff(num) {
 document.addEventListener("keydown", e => {
   const key = e.key;
   const regex = /^[+\-/*\u2212\u002B\u00F7\u00D70-9\.]{1}$/
-  if (key.match(regex)) { 
+  if (key.match(regex) && display.value.length < 9) { 
     appendToDisplay(key);
   } else if (key === 'Backspace') {
     clearDisplay(false);
