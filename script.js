@@ -50,8 +50,9 @@ btnSection.addEventListener("click", btn => {
     const out = evaluate(display.value);
     clearDisplay(true);
     appendToDisplay(out);
-  } else if (btn.classList.contains("numBtn")
-    || btn.classList.contains("operatorBtn")) {
+  } else if (
+    (btn.classList.contains("numBtn") || btn.classList.contains("operatorBtn"))
+    && display.value.length < 9) {
     appendToDisplay(btn.textContent);
   };
 
