@@ -132,7 +132,7 @@ document.addEventListener("keydown", e => {
   } else if (key === 'Backspace') {
     clearDisplay(false);
   } else if (key === 'Enter' || key === '=') {
-    showResult(out)
+    showResult()
   };
 });
 
