@@ -151,7 +151,9 @@ function clearDisplay(all=false) {all
 };
 
 function showResult() {
-  const out = evaluate(display.value) || errorMessage;
+  let out = evaluate(display.value);
+  Number.isNaN(out) ? out = errorMessage : {};
+  
   clearDisplay(true);
   appendToDisplay(out);
 };
